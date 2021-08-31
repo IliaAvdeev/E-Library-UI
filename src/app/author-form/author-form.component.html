@@ -1,0 +1,74 @@
+<form [formGroup]="authorForm" (ngSubmit)="onSubmit()">
+  <p>
+    <mat-form-field appearance="legacy">
+      <mat-label>Имя автора</mat-label>
+      <input matInput
+             placeholder="Введите полное имя автора"
+             formControlName="name"
+             required>
+      <mat-error>{{ errorMessage }}</mat-error>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="legacy">
+      <mat-label>Дата рождения</mat-label>
+      <input matInput
+             [matDatepicker]="birthPicker"
+             placeholder="Выберите или введите дату рождения"
+             formControlName="dateOfBirth"
+             required>
+      <mat-datepicker-toggle matSuffix [for]="birthPicker"></mat-datepicker-toggle>
+      <mat-datepicker #birthPicker></mat-datepicker>
+      <mat-error>{{ errorMessage }}</mat-error>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="legacy">
+      <mat-label>Дата смерти</mat-label>
+      <input matInput
+             [matDatepicker]="deathPicker"
+             placeholder="Выберите или введите дату смерти"
+             formControlName="dateOfDeath">
+      <mat-datepicker-toggle matSuffix [for]="deathPicker"></mat-datepicker-toggle>
+      <mat-datepicker #deathPicker></mat-datepicker>
+      <mat-error>{{ errorMessage }}</mat-error>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="legacy">
+      <mat-label>Место рождения</mat-label>
+      <input matInput
+             placeholder="Введите название страны"
+             formControlName="countryOfBirth"
+             required>
+      <mat-error>{{ errorMessage }}</mat-error>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="legacy">
+      <mat-label>Место смерти</mat-label>
+      <input matInput
+             placeholder="Введите название страны"
+             formControlName="countryOfDeath">
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="legacy">
+      <mat-label>Биография</mat-label>
+      <textarea matInput
+                formControlName="biography"></textarea>
+    </mat-form-field>
+  </p>
+
+  <button type="submit" [disabled]="!authorForm.valid">Отправить</button>
+</form>
+
+<!--p>Form Value: {{ authorForm.value | json }}</p>
+
+<p>Form Status: {{ authorForm.status }}</p-->
+

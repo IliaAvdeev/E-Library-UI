@@ -1,0 +1,106 @@
+<div>
+  <div *ngIf="book">
+    <div>
+      <button (click)="delete()">Удалить</button>
+    </div>
+
+    <div *ngIf="book!==editBook">
+      <div>
+        <button (click)="edit()">Изменить</button>
+      </div>
+      <h2>{{ book.title }}</h2>
+      <div *ngIf="author">
+        Автор: <a href="/authors/{{ author.id }}">{{ author.name }}</a>
+      </div>
+      <div *ngIf="genre">
+        Жанр: {{ genre.name }}
+      </div>
+      <div *ngIf="cycle">
+        Цикл: {{ cycle.name }}
+      </div>
+      <div *ngIf="book.description">
+        Описание: {{ book.description }}
+      </div>
+      <pre>
+        {{ book.text }}
+      </pre>
+    </div>
+
+    <div *ngIf="book===editBook">
+      <div>
+        <button (click)="update()">Сохранить</button>
+      </div>
+      <p>
+        <mat-form-field appearance="legacy">
+          <mat-label>Название</mat-label>
+          <input matInput
+                 [(ngModel)]="book.title"
+                 placeholder="Введите название книги"
+                 (keyup.enter)="update()"
+                 required>
+          <mat-error>{{ getErrorMessage() }}</mat-error>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field appearance="legacy">
+          <mat-label>Автор</mat-label>
+          <mat-select [(ngModel)]="book.author">
+            <mat-option *ngFor="let author of authors"
+                        [value]="author.id"
+                        (keyup.enter)="update()"
+                        required>{{ author.name }}</mat-option>
+          </mat-select>
+          <mat-error>{{ getErrorMessage() }}</mat-error>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field appearance="legacy">
+          <mat-label>Жанр</mat-label>
+          <mat-select [(ngModel)]="book.genre">
+            <mat-option *ngFor="let genre of genres"
+                        [value]="genre.id"
+                        (keyup.enter)="update()"
+                        required>{{ genre.name }}</mat-option>
+          </mat-select>
+          <mat-error>{{ getErrorMessage() }}</mat-error>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field appearance="legacy">
+          <mat-label>Цикл</mat-label>
+          <mat-select [(ngModel)]="book.cycle">
+            <mat-option *ngFor="let cycle of cycles"
+                        (keyup.enter)="update()"
+                        [value]="cycle.id">{{ cycle.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field appearance="legacy">
+          <mat-label>Описание</mat-label>
+          <textarea matInput
+                    [(ngModel)]="book.description"
+                    placeholder="Описание книги"
+                    (keyup.enter)="update()"></textarea>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field appearance="legacy">
+          <mat-label>Текст</mat-label>
+          <textarea matInput
+                    [(ngModel)]="book.text"
+                    placeholder="Полный текст книги"
+                    (keyup.enter)="update()"
+                    required></textarea>
+          <mat-error>{{ getErrorMessage() }}</mat-error>
+        </mat-form-field>
+      </p>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,73 @@
+<form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+  <p>
+    <mat-form-field appearance="legacy">
+      <mat-label>Название</mat-label>
+      <input matInput
+             placeholder="Введите название книги"
+             formControlName="title"
+             required>
+      <mat-error>{{ errorMessage }}</mat-error>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="legacy">
+      <mat-label>Автор</mat-label>
+      <mat-select formControlName="author">
+        <mat-option *ngFor="let author of authors"
+                    [value]="author.id"
+                    required>{{ author.name }}</mat-option>
+      </mat-select>
+      <mat-error>{{ errorMessage }}</mat-error>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="legacy">
+      <mat-label>Жанр</mat-label>
+      <mat-select formControlName="genre">
+        <mat-option *ngFor="let genre of genres"
+                    [value]="genre.id"
+                    required>{{ genre.name }}</mat-option>
+      </mat-select>
+      <mat-error>{{ errorMessage }}</mat-error>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="legacy">
+      <mat-label>Цикл</mat-label>
+      <mat-select formControlName="cycle">
+        <mat-option *ngFor="let cycle of cycles"
+                    [value]="cycle.id">{{ cycle.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="legacy">
+      <mat-label>Описание</mat-label>
+      <textarea matInput
+                placeholder="Описание книги"
+                formControlName="description"></textarea>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="legacy">
+      <mat-label>Текст</mat-label>
+      <textarea matInput
+                placeholder="Полный текст книги"
+                formControlName="text"
+                required></textarea>
+      <mat-error>{{ errorMessage }}</mat-error>
+    </mat-form-field>
+  </p>
+
+  <button type="submit" [disabled]="!bookForm.valid">Отправить</button>
+</form>
+
+
+<!--p>Form Value: {{ bookForm.value | json }}</p>
+
+<p>Form Status: {{ bookForm.status }}</p-->

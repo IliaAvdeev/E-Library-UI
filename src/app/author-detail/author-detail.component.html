@@ -1,0 +1,103 @@
+<div class="container">
+  <div *ngIf="author">
+    <div>
+      <button (click)="delete()">Удалить</button>
+    </div>
+
+    <div *ngIf="author!==editAuthor">
+      <div>
+        <button (click)="edit()">Изменить</button>
+      </div>
+      <h2>{{ author.name }}</h2>
+      <div *ngIf="author.dateOfDeath != undefined">
+        {{ formatDate(author.dateOfBirth) }}, {{ author.countryOfBirth }}
+        — {{ formatDate(author.dateOfDeath) }}, {{ author.countryOfDeath }}
+      </div>
+      <div *ngIf="author.dateOfDeath == undefined">
+        {{ formatDate(author.dateOfBirth) }}, {{ author.countryOfBirth }}
+      </div>
+      <h3>Биография:</h3>
+      <div>
+        <pre>{{ author.biography }}</pre>
+      </div>
+      <h3>Библиография: </h3>
+      <ul *ngFor="let book of books">
+        <li><a routerLink="/books/{{ book.id }}">{{ book.title }}</a></li>
+      </ul>
+    </div>
+
+    <div *ngIf="author===editAuthor">
+      <div>
+        <button (click)="update()">Сохранить</button>
+      </div>
+      <p>
+        <mat-form-field appearance="legacy">
+          <mat-label>Имя автора</mat-label>
+          <input matInput
+                 [(ngModel)]="author.name"
+                 placeholder="Введите полное имя автора"
+                 (keyup.enter)="update()"
+                 required>
+          <mat-error>{{ errorMessage }}</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="legacy">
+          <mat-label>Дата рождения</mat-label>
+          <input matInput
+                 [matDatepicker]="birthPicker"
+                 [(ngModel)]="author.dateOfBirth"
+                 placeholder="Выберите или введите дату рождения"
+                 (keyup.enter)="update()"
+                 required>
+          <mat-datepicker-toggle matSuffix [for]="birthPicker"></mat-datepicker-toggle>
+          <mat-datepicker #birthPicker></mat-datepicker>
+          <mat-error>{{ errorMessage }}</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="legacy">
+          <mat-label>Дата смерти</mat-label>
+          <input matInput
+                 [matDatepicker]="deathPicker"
+                 [(ngModel)]="author.dateOfDeath"
+                 placeholder="Выберите или введите дату смерти"
+                 (keyup.enter)="update()">
+          <mat-datepicker-toggle matSuffix [for]="deathPicker"></mat-datepicker-toggle>
+          <mat-datepicker #deathPicker></mat-datepicker>
+          <mat-error>{{ errorMessage }}</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="legacy">
+          <mat-label>Местро рождения</mat-label>
+          <input matInput
+                 [(ngModel)]="author.countryOfBirth"
+                 placeholder="Введите название страны"
+                 (keyup.enter)="update()"
+                 required>
+          <mat-error>{{ errorMessage }}</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="legacy">
+          <mat-label>Местро смерти</mat-label>
+          <input matInput
+                 [(ngModel)]="author.countryOfDeath"
+                 placeholder="Введите название страны"
+                 (keyup.enter)="update()">
+          <mat-error>{{ errorMessage }}</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="legacy">
+          <mat-label>Биография</mat-label>
+          <textarea matInput
+                 [(ngModel)]="author.biography"
+                 (keyup.enter)="update()"></textarea>
+          <mat-error>{{ errorMessage }}</mat-error>
+        </mat-form-field>
+      </p>
+    </div>
+  </div>
+</div>

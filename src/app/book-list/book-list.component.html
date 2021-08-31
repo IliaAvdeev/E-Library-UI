@@ -1,0 +1,25 @@
+<table>
+  <tr>
+    <th>Автор</th>
+    <th>Название</th>
+  </tr>
+  <tbody>
+  <tr *ngFor="let book of pageOfBooks">
+    {{ getAuthor(book.author) }}
+    <td *ngIf="currentAuthor">
+      <a routerLink="/authors/{{ currentAuthor.id }}">{{ currentAuthor.name }}</a>
+    </td>
+    <td><a routerLink="/books/{{ book.id }}">{{ book.title }}</a></td>
+  </tr>
+  </tbody>
+</table>
+<mat-paginator [length]=length
+               [pageSize]=pageSize
+               [pageSizeOptions]=pageSizeOptions
+               [showFirstLastButtons]="true"
+               (page)="pageEvent = getServerData($event)"
+               aria-label="Select page">
+</mat-paginator>
+<p>
+  <a routerLink="/books/new">Добавить книгу</a>
+</p>

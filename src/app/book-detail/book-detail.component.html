@@ -9,10 +9,10 @@
         <button (click)="edit()">Изменить</button>
       </div>
       <h2>{{ book.title }}</h2>
-      <div *ngIf="author">
+      <div>
         Автор: <a href="/authors/{{ author.id }}">{{ author.name }}</a>
       </div>
-      <div *ngIf="genre">
+      <div>
         Жанр: {{ genre.name }}
       </div>
       <div *ngIf="cycle">

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Author } from '../model/author';
 import { AuthorService } from '../services/author.service';
 import { PageEvent } from '@angular/material/paginator';
@@ -10,11 +10,8 @@ import { PageEvent } from '@angular/material/paginator';
 })
 export class AuthorListComponent implements OnInit {
 
-  pageSize = 20;
-  pageIndex = 0;
-  pageSizeOptions = [5, 10, 20, 100];
   length!: number;
-  pageEvent?: PageEvent;
+  @Input() pageEvent?: PageEvent;
   pageOfAuthors!: Author[];
 
   constructor(private authorService: AuthorService) {
@@ -22,7 +19,7 @@ export class AuthorListComponent implements OnInit {
 
   ngOnInit() {
     this.authorService.findAll().subscribe(data => this.length = data.length);
-    this.authorService.findPaginated(this.pageIndex, this.pageSize).subscribe(data => {
+    this.authorService.findPaginated(0, 20).subscribe(data => {
       this.pageOfAuthors = data;
     });
   }

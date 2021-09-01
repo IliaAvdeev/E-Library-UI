@@ -3,7 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -22,6 +22,7 @@ import { AuthorService } from './services/author.service';
 import { BookService } from './services/book.service';
 import { GenreService } from "./services/genre.service";
 import { CycleService } from "./services/cycle.service";
+import { CustomPaginatorComponent } from './custom-paginator/custom-paginator.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { CycleService } from "./services/cycle.service";
     AuthorDetailComponent,
     BookListComponent,
     BookFormComponent,
-    BookDetailComponent
+    BookDetailComponent,
+    CustomPaginatorComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,8 @@ import { CycleService } from "./services/cycle.service";
     GenreService,
     CycleService,
     { provide: MAT_DATE_LOCALE, useValue: 'ru_RU' },
-    { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } }
+    { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } },
+    { provide: MatPaginatorIntl, useClass: CustomPaginatorComponent }
   ],
   bootstrap: [AppComponent]
 })

@@ -21,9 +21,15 @@
       <div *ngIf="book.description">
         Описание: {{ book.description }}
       </div>
-      <pre>
-        {{ book.text }}
-      </pre>
+      <div *ngIf="textHidden">
+        <button (click)="expandText()">Развернуть текст</button>
+      </div>
+      <div *ngIf="!textHidden">
+        <button (click)="collapseText()">Свернуть текст</button>
+        <pre>
+          {{ book.text }}
+        </pre>
+      </div>
     </div>
 
     <div *ngIf="book===editBook">

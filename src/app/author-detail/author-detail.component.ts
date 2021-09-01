@@ -18,6 +18,8 @@ moment.locale('ru_RU');
 export class AuthorDetailComponent implements OnInit {
   @Input() author!: Author;
   books!: Book[];
+  briefBio!: string;
+  fullBioHidden = true;
   editAuthor: Author | undefined;
   errorMessage = 'Введите корректное значение';
 
@@ -32,13 +34,27 @@ export class AuthorDetailComponent implements OnInit {
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.authorService.findOne(id)
-      .subscribe(data => this.author = data);
+      .subscribe(data => {
+        this.author = data;
+        if (data.biography) {
+          let endOfFirstParagraph = data.biography.indexOf('\n');
+          this.briefBio = data.biography.substring(0, endOfFirstParagraph);
+        }
+      });
     this.bookService.findByAuthorId(id)
       .subscribe(data => this.books = data);
   }
 
   formatDate(date: Date): string {
     return moment(date).format('DD MMMM YYYY');
+  }
+
+  expandBio() {
+    this.fullBioHidden = false;
+  }
+
+  collapseBio() {
+    this.fullBioHidden = true;
   }
 
   edit() {

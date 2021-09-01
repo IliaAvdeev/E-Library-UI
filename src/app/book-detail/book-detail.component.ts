@@ -8,7 +8,6 @@ import { BookService } from '../services/book.service';
 import { AuthorService } from '../services/author.service';
 import { GenreService } from '../services/genre.service';
 import { CycleService } from '../services/cycle.service';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-book-detail',
@@ -20,6 +19,7 @@ export class BookDetailComponent implements OnInit {
   author!: Author;
   genre!: Genre;
   cycle?: Cycle;
+  textHidden = true;
 
   authors!: Author[];
   genres!: Genre[];
@@ -53,6 +53,14 @@ export class BookDetailComponent implements OnInit {
     )
   }
 
+  expandText() {
+    this.textHidden = false;
+  }
+
+  collapseText() {
+    this.textHidden = true;
+  }
+
   edit() {
     this.authorService.findAll().subscribe(data => {
                       this.authors = data;
@@ -78,7 +86,6 @@ export class BookDetailComponent implements OnInit {
           .subscribe(result => {
             this.editBook = undefined;
             this.router.navigate([`/books/${this.book.id}`]);
-            //window.location.reload();
         });
     }
   }

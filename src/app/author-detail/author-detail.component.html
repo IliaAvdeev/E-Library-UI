@@ -16,14 +16,23 @@
       <div *ngIf="author.dateOfDeath == undefined">
         {{ formatDate(author.dateOfBirth) }}, {{ author.countryOfBirth }}
       </div>
-      <h3>Биография:</h3>
-      <div>
-        <pre>{{ author.biography }}</pre>
+      <div *ngIf="books.length > 0">
+        <h3>Библиография: </h3>
+        <ul *ngFor="let book of books">
+          <li><a routerLink="/books/{{ book.id }}">{{ book.title }}</a></li>
+        </ul>
       </div>
-      <h3>Библиография: </h3>
-      <ul *ngFor="let book of books">
-        <li><a routerLink="/books/{{ book.id }}">{{ book.title }}</a></li>
-      </ul>
+      <div *ngIf="author.biography">
+        <h3>Биография:</h3>
+        <div *ngIf="fullBioHidden">
+          <pre>{{ briefBio }}</pre>
+          <button (click)="expandBio()">Развернуть</button>
+        </div>
+        <div *ngIf="!fullBioHidden">
+          <button (click)="collapseBio()">Свернуть</button>
+          <pre>{{ author.biography }}</pre>
+        </div>
+      </div>
     </div>
 
     <div *ngIf="author===editAuthor">

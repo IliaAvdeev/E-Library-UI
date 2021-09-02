@@ -13,6 +13,8 @@ export class AuthorListComponent implements OnInit {
   length!: number;
   @Input() pageEvent?: PageEvent;
   pageOfAuthors!: Author[];
+  checkboxesHidden = true;
+  authorsForDeletion: number[] = [];
 
   constructor(private authorService: AuthorService) {
   }
@@ -28,5 +30,28 @@ export class AuthorListComponent implements OnInit {
     this.authorService.findPaginated(event?.pageIndex, event?.pageSize).subscribe(
       response => this.pageOfAuthors = response);
     return event;
+  }
+
+  deleteAuthors() {
+    if (this.checkboxesHidden) {
+      this.checkboxesHidden = false;
+    } else {
+      this.checkboxesHidden = true;
+      this.authorService.deleteAll(this.authorsForDeletion).subscribe(
+        response => {
+          this.authorsForDeletion = [];
+          window.location.reload()
+        }
+      )
+    }
+  }
+
+  selectAuthor(id: number) {
+    if (!this.authorsForDeletion.includes(id)) {
+      this.authorsForDeletion.push(id);
+    } else {
+      let index = this.authorsForDeletion.indexOf(id);
+      this.authorsForDeletion.splice(index, 1);
+    }
   }
 }

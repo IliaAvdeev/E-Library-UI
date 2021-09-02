@@ -36,6 +36,10 @@ export class BookService {
     return this.http.delete<Book>(`${this.booksUrl}/${id}`);
   }
 
+  public deleteAll(ids: number[]) {
+    return this.http.post<Book[]>(`${this.booksUrl}/bulkDelete`, ids);
+  }
+
   public update(book: Book, id: number) {
     return this.http.put<Book>(`${this.booksUrl}/${id}`, book);
   }

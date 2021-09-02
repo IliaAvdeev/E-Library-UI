@@ -1,20 +1,24 @@
 <table>
   <tr>
-    <th>Автор</th>
     <th>Название</th>
+    <th>Автор</th>
   </tr>
   <tbody>
   <tr *ngFor="let book of pageOfBooks">
     {{ getAuthor(book.author) }}
+    <input type="checkbox"
+               [hidden]="checkboxesHidden"
+               (change)="selectBook(book.id)">
+    <td><a routerLink="/books/{{ book.id }}">{{ book.title }}</a></td>
     <td *ngIf="currentAuthor">
       <a routerLink="/authors/{{ currentAuthor.id }}">{{ currentAuthor.name }}</a>
     </td>
-    <td><a routerLink="/books/{{ book.id }}">{{ book.title }}</a></td>
   </tr>
   </tbody>
 </table>
 <app-custom-paginator [length]=length
                       (pageEvent)="pageEvent = getServerData($event)"></app-custom-paginator>
 <p>
-  <a routerLink="/books/new">Добавить книгу</a>
+  <button routerLink="/books/new">Добавить книгу</button>
 </p>
+<button (click)="deleteBooks()">Удалить книги</button>

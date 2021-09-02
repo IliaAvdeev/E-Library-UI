@@ -4,12 +4,17 @@
   </tr>
   <tbody>
   <tr *ngFor="let author of pageOfAuthors">
+    <input type="checkbox"
+               [hidden]="checkboxesHidden"
+               (change)="selectAuthor(author.id)">
     <td><a routerLink="/authors/{{ author.id }}">{{ author.name }}</a></td>
   </tr>
   </tbody>
 </table>
+Result: {{ authorsForDeletion.length }}
 <app-custom-paginator [length]=length
                       (pageEvent)="pageEvent = getServerData($event)"></app-custom-paginator>
 <p>
-  <a routerLink="/authors/new">Добавить автора</a>
+  <button routerLink="/authors/new">Добавить автора</button>
 </p>
+<button (click)="deleteAuthors()">Удалить авторов</button>

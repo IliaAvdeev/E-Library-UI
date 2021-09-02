@@ -32,6 +32,10 @@ export class AuthorService {
     return this.http.delete<Author>(`${this.authorsUrl}/${id}`);
   }
 
+  public deleteAll(ids: number[]) {
+    return this.http.post<Author[]>(`${this.authorsUrl}/bulkDelete`, ids);
+  }
+
   public update(author: Author, id: number) {
     return this.http.put<Author>(`${this.authorsUrl}/${id}`, author);
   }

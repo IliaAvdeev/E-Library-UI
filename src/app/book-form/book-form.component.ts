@@ -53,6 +53,9 @@ export class BookFormComponent {
   }
 
   onSubmit() {
+    if (this.bookForm.controls['cycle'].value == null) {
+      this.bookForm.controls['cycle'].setValue(1);
+    }
     this.bookService.save({...this.bookForm.value}).subscribe(result => this.gotoBookList());
   }
 

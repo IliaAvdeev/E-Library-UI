@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Cycle } from '../model/cycle';
 import { Observable } from 'rxjs';
 
@@ -16,7 +16,11 @@ export class CycleService {
     return this.http.get<Cycle[]>(this.cyclesUrl);
   }
 
-  findOne(id: number): Observable<Cycle> {
+  public findPaginated(page?: number, size?: number): Observable<Cycle[]> {
+    return this.http.get<Cycle[]>(`${this.cyclesUrl}?page=${page}&size=${size}`);
+  }
+
+  public findOne(id: number): Observable<Cycle> {
     return this.http.get<Cycle>(`${this.cyclesUrl}/${id}`);
   }
 

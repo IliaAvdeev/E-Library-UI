@@ -1,0 +1,13 @@
+<form [formGroup]="cycleForm" (ngSubmit)="onSubmit()">
+  <p>
+    <mat-form-field appearance="legacy">
+      <mat-label>Название цикла</mat-label>
+      <input matInput
+             placeholder="Введите название цикла"
+             formControlName="name"
+             required>
+      <mat-error>{{ errorMessage }}</mat-error>
+    </mat-form-field>
+  </p>
+  <button type="submit" [disabled]="!cycleForm.valid">Отправить</button>
+</form>

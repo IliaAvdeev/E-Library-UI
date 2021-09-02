@@ -1,0 +1,13 @@
+<form [formGroup]="genreForm" (ngSubmit)="onSubmit()">
+  <p>
+    <mat-form-field appearance="legacy">
+      <mat-label>Название жанра</mat-label>
+      <input matInput
+             placeholder="Введите название жанра"
+             formControlName="name"
+             required>
+      <mat-error>{{ errorMessage }}</mat-error>
+    </mat-form-field>
+  </p>
+  <button type="submit" [disabled]="!genreForm.valid">Отправить</button>
+</form>

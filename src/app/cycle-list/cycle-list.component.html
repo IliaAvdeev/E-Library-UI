@@ -1,0 +1,23 @@
+<table>
+  <tr>
+    <th>Список циклов:</th>
+  </tr>
+  <tbody>
+  <ul *ngFor="let cycle of pageOfCycles">
+    <details>
+      <summary>
+        {{ cycle.name }}
+      </summary>
+      <ul *ngFor="let book of getBooks(cycle.id)">
+        <li><a routerLink="/books/{{ book.id }}">{{ book.title }}</a></li>
+      </ul>
+    </details>
+  </ul>
+  </tbody>
+</table>
+<app-custom-paginator [length]=length
+                      (pageEvent)="pageEvent = getServerData($event)"></app-custom-paginator>
+<p>
+  <button (click)="displayForm()" [hidden]="!formHidden">Добавить цикл</button>
+</p>
+<app-cycle-form [hidden]="formHidden" (formSubmitted)="submitCycle($event)"></app-cycle-form>

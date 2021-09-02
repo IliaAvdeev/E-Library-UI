@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Genre } from '../model/genre';
 import { Observable } from 'rxjs';
 
@@ -16,7 +16,11 @@ export class GenreService {
     return this.http.get<Genre[]>(this.genresUrl);
   }
 
-  findOne(id: number): Observable<Genre> {
+  public findPaginated(page?: number, size?: number): Observable<Genre[]> {
+    return this.http.get<Genre[]>(`${this.genresUrl}?page=${page}&size=${size}`);
+  }
+
+  public findOne(id: number): Observable<Genre> {
     return this.http.get<Genre>(`${this.genresUrl}/${id}`);
   }
 

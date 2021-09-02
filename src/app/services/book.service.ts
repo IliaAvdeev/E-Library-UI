@@ -28,6 +28,14 @@ export class BookService {
     return this.http.get<Book[]>(`${this.booksUrl}/author/${authorId}`);
   }
 
+  public findByGenreId(genreId: number): Observable<Book[]> {
+    return this.http.get<Book[]>(`${this.booksUrl}/genre/${genreId}`);
+  }
+
+  public findByCycleId(cycleId: number): Observable<Book[]> {
+    return this.http.get<Book[]>(`${this.booksUrl}/cycle/${cycleId}`);
+  }
+
   public save(book: Book) {
     return this.http.post<Book>(this.booksUrl, book);
   }

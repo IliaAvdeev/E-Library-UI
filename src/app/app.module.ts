@@ -23,6 +23,10 @@ import { BookService } from './services/book.service';
 import { GenreService } from "./services/genre.service";
 import { CycleService } from "./services/cycle.service";
 import { CustomPaginatorComponent } from './custom-paginator/custom-paginator.component';
+import { GenreListComponent } from './genre-list/genre-list.component';
+import { GenreFormComponent } from './genre-form/genre-form.component';
+import { CycleListComponent } from './cycle-list/cycle-list.component';
+import { CycleFormComponent } from './cycle-form/cycle-form.component';
 
 
 @NgModule({
@@ -34,7 +38,11 @@ import { CustomPaginatorComponent } from './custom-paginator/custom-paginator.co
     BookListComponent,
     BookFormComponent,
     BookDetailComponent,
-    CustomPaginatorComponent
+    CustomPaginatorComponent,
+    GenreListComponent,
+    GenreFormComponent,
+    CycleListComponent,
+    CycleFormComponent
   ],
   imports: [
     BrowserModule,

@@ -1,21 +1,13 @@
 <div class="container">
   <div style="text-align: center;">
     <h1>{{ title }}</h1>
-    <div>
-      <a routerLink="">Главная</a>
-    </div>
-    <div>
-      <a routerLink="/authors">Авторы</a>
-    </div>
-    <div>
-      <a routerLink="/books">Книги</a>
-    </div>
-    <div>
-      <a routerLink="/genres">Жанры</a>
-    </div>
-    <div>
-      <a routerLink="/cycles">Циклы</a>
-    </div>
+      <button routerLink="" class="menu-button">Главная</button>
+      <button routerLink="/authors" class="menu-button">Авторы</button>
+      <button routerLink="/books" class="menu-button">Книги</button>
+      <button routerLink="/genres" class="menu-button">Жанры</button>
+      <button routerLink="/cycles" class="menu-button">Циклы</button>
+      <button routerLink="/users/sign-up" class="menu-button">Зарегистрироваться</button>
+      <button routerLink="/users/sign-in" class="menu-button">Войти</button>
   </div>
   <router-outlet></router-outlet>
 </div>

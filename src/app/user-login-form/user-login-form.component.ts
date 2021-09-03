@@ -27,6 +27,12 @@ export class UserLoginFormComponent {
   onSubmit() {
     this.userService.findByEmail(this.userForm.controls['email'].value,
       this.userForm.controls['password'].value)
-      .subscribe(response => this.router.navigate(['']));
+      .subscribe(response => {
+        if (response) {
+          this.router.navigate([''])
+        } else {
+          this.router.navigate(['/users/sign-up'])
+        }
+      });
   }
 }

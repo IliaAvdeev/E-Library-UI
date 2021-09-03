@@ -27,8 +27,6 @@ import { GenreListComponent } from './genre-list/genre-list.component';
 import { GenreFormComponent } from './genre-form/genre-form.component';
 import { CycleListComponent } from './cycle-list/cycle-list.component';
 import { CycleFormComponent } from './cycle-form/cycle-form.component';
-import { RegistrationFormComponent } from './registration-form/registration-form.component';
-import { LoginFormComponent } from './login-form/login-form.component';
 import { UserRegistrationFormComponent } from './user-registration-form/user-registration-form.component';
 import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
 
@@ -47,8 +45,6 @@ import { UserLoginFormComponent } from './user-login-form/user-login-form.compon
     GenreFormComponent,
     CycleListComponent,
     CycleFormComponent,
-    RegistrationFormComponent,
-    LoginFormComponent,
     UserRegistrationFormComponent,
     UserLoginFormComponent
   ],

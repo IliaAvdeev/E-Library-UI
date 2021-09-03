@@ -14,6 +14,10 @@ export class UserService {
     this.usersUrl = 'http://localhost:5200/users';
   }
 
+  public findByEmail(email: string, password: string): Observable<User> {
+    return this.http.get<User>(`${this.usersUrl}?email=${email}&password=${password}`);
+  }
+
   public save(user: User) {
     return this.http.post<User>(this.usersUrl, user);
   }

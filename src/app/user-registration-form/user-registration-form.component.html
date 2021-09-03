@@ -1,0 +1,45 @@
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <p>
+    <mat-form-field appearance="legacy">
+      <mat-label>Адрес электронной почты</mat-label>
+      <input matInput
+             placeholder="Введите адрес электронной почты"
+             formControlName="email"
+             required>
+      <mat-error>{{ errorMessage }}</mat-error>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="legacy">
+      <mat-label>Имя пользователя</mat-label>
+      <input matInput
+             placeholder="Придумайте имя пользователя"
+             formControlName="username"
+             required>
+      <mat-error>{{ errorMessage }}</mat-error>
+    </mat-form-field>
+  </p>
+
+  <p>
+    <mat-form-field appearance="legacy">
+      <mat-label>Пароль</mat-label>
+      <input matInput
+             [type]="hidePassword ? 'password' : 'text'"
+             placeholder="Придумайте надёжный пароль"
+             formControlName="password"
+             required>
+      <button mat-icon-button
+              matSuffix
+              (click)="hidePassword = !hidePassword"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hidePassword">
+        <mat-icon>
+          {{hidePassword ? 'visibility_off' : 'visibility'}}
+        </mat-icon>
+      </button>
+    </mat-form-field>
+  </p>
+
+  <button type="submit" [disabled]="!userForm.valid">Зарегистрироваться</button>
+</form>

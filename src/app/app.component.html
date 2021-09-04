@@ -5,7 +5,14 @@
   <button routerLink="" id="bookwarm-header">{{ title }}</button>
   <button routerLink="/genres">Жанры</button>
   <button routerLink="/cycles">Циклы</button>
-  <button routerLink="/profile">Профиль</button>
+  <div class="dropdown">
+    <button routerLink="/profile">Профиль</button>
+    <div class="dropdown-content">
+      <button routerLink="/users/sign-in">Войти</button>
+      <button routerLink="/users/sign-up">Зарегистрироваться</button>
+    </div>
+  </div>
+
 </div>
 <div>
   <router-outlet></router-outlet>

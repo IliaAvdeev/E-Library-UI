@@ -15,6 +15,21 @@
   background: rgba(255, 240, 210, .5);
 }
 
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  text-align: left;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+  position: absolute;
+}
+
 #bookwarm-header {
   font-size: 48px;
   border: none;

@@ -1,17 +1,26 @@
 <h2>Список жанров:</h2>
-<ul *ngFor="let genre of pageOfGenres">
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      {{ genre.name }}
-    </mat-expansion-panel-header>
-    <ng-template matExpansionPanelContent>
-      <app-genre-detail [genre]="genre"></app-genre-detail>
-    </ng-template>
-  </mat-expansion-panel>
-</ul>
+<table>
+  <tbody>
+    <tr *ngFor="let genre of pageOfGenres">
+      <td>
+        <mat-checkbox *ngIf="!checkboxesHidden"
+                    (change)="selectGenre(genre.id)"></mat-checkbox>
+      </td>
+      <td>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            {{ genre.name }}
+          </mat-expansion-panel-header>
+          <ng-template matExpansionPanelContent>
+            <app-genre-detail [genre]="genre"></app-genre-detail>
+          </ng-template>
+        </mat-expansion-panel>
+      </td>
+    </tr>
+  </tbody>
+</table>
 <app-custom-paginator [length]=length
                       (pageEvent)="pageEvent = getServerData($event)"></app-custom-paginator>
-<p>
-  <button (click)="displayForm()" [hidden]="!formHidden">Добавить жанр</button>
-</p>
+<button (click)="formHidden = false" [hidden]="!formHidden">Добавить жанр</button>
 <app-genre-form [hidden]="formHidden" (formSubmitted)="submitGenre($event)"></app-genre-form>
+<button (click)="deleteGenres()">Удалить жанры</button>

@@ -17,6 +17,9 @@ export class GenreListComponent implements OnInit {
   formHidden = true;
   @Input() formSubmission?: Genre;
 
+  checkboxesHidden = true;
+  genresForDeletion: number[] = [];
+
   constructor(private genreService: GenreService) { }
 
   ngOnInit(): void {
@@ -32,14 +35,30 @@ export class GenreListComponent implements OnInit {
     return event;
   }
 
-  displayForm() {
-    this.formHidden = false;
-  }
-
   submitGenre(formSubmission?: Genre) {
     if (formSubmission) {
       this.genreService.save(formSubmission)
         .subscribe(response => window.location.reload())
+    }
+  }
+
+  selectGenre(id: number) {
+    if (!this.genresForDeletion.includes(id)) {
+      this.genresForDeletion.push(id);
+    } else {
+      let index = this.genresForDeletion.indexOf(id);
+      this.genresForDeletion.splice(index, 1);
+    }
+  }
+
+  deleteGenres() {
+    if (this.checkboxesHidden) {
+      this.checkboxesHidden = false;
+    } else {
+      this.checkboxesHidden = true;
+      this.genreService.deleteAll(this.genresForDeletion).subscribe(
+        response => window.location.reload()
+      )
     }
   }
 }

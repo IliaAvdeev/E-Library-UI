@@ -17,9 +17,10 @@ export class CycleListComponent implements OnInit {
   formHidden = true;
   @Input() formSubmission?: Cycle;
 
-  constructor(
-    private cycleService: CycleService
-  ) { }
+  checkboxesHidden = true;
+  cyclesForDeletion: number[] = [];
+
+  constructor(private cycleService: CycleService) { }
 
   ngOnInit(): void {
     this.cycleService.findAll().subscribe(data => this.length = data.length);
@@ -41,6 +42,25 @@ export class CycleListComponent implements OnInit {
     }
   }
 
+  selectCycle(id: number) {
+    if (!this.cyclesForDeletion.includes(id)) {
+      this.cyclesForDeletion.push(id);
+    } else {
+      let index = this.cyclesForDeletion.indexOf(id);
+      this.cyclesForDeletion.splice(index, 1);
+    }
+  }
+
+  deleteCycles() {
+    if (this.checkboxesHidden) {
+      this.checkboxesHidden = false;
+    } else {
+      this.checkboxesHidden = true;
+      this.cycleService.deleteAll(this.cyclesForDeletion).subscribe(
+        response => window.location.reload()
+      )
+    }
+  }
 }
 
 

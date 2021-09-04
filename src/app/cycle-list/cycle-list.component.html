@@ -4,7 +4,7 @@
   </tr>
   <tbody>
   <ul *ngFor="let cycle of pageOfCycles">
-    <details>
+    <details *ngIf="cycle.id!=1">
       <summary>
         {{ cycle.name }}
       </summary>

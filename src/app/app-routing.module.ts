@@ -6,7 +6,6 @@ import { GenreListComponent } from "./genre-list/genre-list.component";
 import { CycleListComponent } from "./cycle-list/cycle-list.component";
 import { AuthorFormComponent } from './author-form/author-form.component';
 import { BookFormComponent } from './book-form/book-form.component';
-import { GenreFormComponent } from "./genre-form/genre-form.component";
 import { UserRegistrationFormComponent } from "./user-registration-form/user-registration-form.component";
 import { UserLoginFormComponent } from "./user-login-form/user-login-form.component";
 import { AuthorDetailComponent } from './author-detail/author-detail.component';
@@ -19,7 +18,6 @@ const routes: Routes = [
   { path: 'cycles', component: CycleListComponent },
   { path: 'authors/new', component: AuthorFormComponent },
   { path: 'books/new', component: BookFormComponent },
-  { path: 'genres/new', component: GenreFormComponent },
   { path: 'users/sign-up', component: UserRegistrationFormComponent },
   { path: 'users/sign-in', component: UserLoginFormComponent },
   { path: 'authors/:id', component: AuthorDetailComponent },

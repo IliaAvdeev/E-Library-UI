@@ -38,9 +38,10 @@
     <mat-form-field appearance="legacy">
       <mat-label>Цикл</mat-label>
       <mat-select formControlName="cycle">
-        <mat-option *ngFor="let cycle of cycles"
+        <ng-container *ngFor="let cycle of cycles">
+          <mat-option *ngIf="cycle.id!=1"
                     [value]="cycle.id">{{ cycle.name }}</mat-option>
-        <mat-option>Добавить цикл</mat-option>
+        </ng-container>
       </mat-select>
     </mat-form-field>
   </p>

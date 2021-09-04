@@ -59,7 +59,7 @@ export class BookListComponent implements OnInit {
       this.bookService.deleteAll(this.booksForDeletion).subscribe(
         response => {
           this.booksForDeletion = [];
-          window.location.reload()
+          // window.location.reload()
         }
       )
     }

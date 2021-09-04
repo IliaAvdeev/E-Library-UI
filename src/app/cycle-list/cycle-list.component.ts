@@ -1,9 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Cycle } from "../model/cycle";
-import { Book } from "../model/book";
 import { CycleService } from "../services/cycle.service";
-import { BookService } from "../services/book.service";
 
 @Component({
   selector: 'app-cycle-list',
@@ -14,26 +12,17 @@ export class CycleListComponent implements OnInit {
 
   length!: number;
   @Input() pageEvent?: PageEvent;
-  cycles!: Cycle[];
   pageOfCycles!: Cycle[];
-  cyclesBooks = new Map<number, Book[]>();
+
   formHidden = true;
   @Input() formSubmission?: Cycle;
 
   constructor(
-    private cycleService: CycleService,
-    private bookService: BookService
+    private cycleService: CycleService
   ) { }
 
   ngOnInit(): void {
-    this.cycleService.findAll().subscribe(data => {
-      this.length = data.length;
-      this.cycles = data;
-      data.forEach((cycle) => {
-        this.bookService.findByCycleId(cycle.id)
-          .subscribe(data => this.cyclesBooks.set(cycle.id, data));
-      })
-    });
+    this.cycleService.findAll().subscribe(data => this.length = data.length);
     this.cycleService.findPaginated(0, 20).subscribe(data => {
       this.pageOfCycles = data;
     });
@@ -43,18 +32,6 @@ export class CycleListComponent implements OnInit {
     this.cycleService.findPaginated(event?.pageIndex, event?.pageSize).subscribe(
       response => this.pageOfCycles = response);
     return event;
-  }
-
-  getBooks(id: number): Book[] {
-    let books = this.cyclesBooks.get(id);
-    if (books) {
-      return books;
-    }
-    return [];
-  }
-
-  displayForm() {
-    this.formHidden = false;
   }
 
   submitCycle(formSubmission?: Cycle) {

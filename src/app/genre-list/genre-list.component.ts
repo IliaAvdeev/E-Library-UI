@@ -1,9 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Genre } from '../model/genre';
-import { Book } from "../model/book";
 import { GenreService } from '../services/genre.service';
-import { BookService } from "../services/book.service";
 
 @Component({
   selector: 'app-genre-list',
@@ -14,24 +12,15 @@ export class GenreListComponent implements OnInit {
 
   length!: number;
   @Input() pageEvent?: PageEvent;
-  genres!: Genre[];
   pageOfGenres!: Genre[];
-  genresBooks = new Map<number, Book[]>();
+
   formHidden = true;
   @Input() formSubmission?: Genre;
 
-  constructor(private genreService: GenreService,
-              private bookService: BookService) { }
+  constructor(private genreService: GenreService) { }
 
   ngOnInit(): void {
-    this.genreService.findAll().subscribe(data => {
-      this.length = data.length;
-      this.genres = data;
-      data.forEach((genre) => {
-        this.bookService.findByGenreId(genre.id)
-          .subscribe(data => this.genresBooks.set(genre.id, data));
-      })
-    });
+    this.genreService.findAll().subscribe(data => this.length = data.length);
     this.genreService.findPaginated(0, 20).subscribe(data => {
       this.pageOfGenres = data;
     });
@@ -41,14 +30,6 @@ export class GenreListComponent implements OnInit {
     this.genreService.findPaginated(event?.pageIndex, event?.pageSize).subscribe(
       response => this.pageOfGenres = response);
     return event;
-  }
-
-  getBooks(id: number): Book[] {
-    let books = this.genresBooks.get(id);
-    if (books) {
-      return books;
-    }
-    return [];
   }
 
   displayForm() {

@@ -9,6 +9,7 @@ import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from "@angular/material/select";
 import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MAT_DATE_LOCALE, MatNativeDateModule } from "@angular/material/core";
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MatMomentDateModule } from '@angular/material-moment-adapter';
 import { AppComponent } from './app.component';
@@ -27,6 +28,8 @@ import { GenreListComponent } from './genre-list/genre-list.component';
 import { GenreFormComponent } from './genre-form/genre-form.component';
 import { CycleListComponent } from './cycle-list/cycle-list.component';
 import { CycleFormComponent } from './cycle-form/cycle-form.component';
+import { CycleDetailComponent } from './cycle-detail/cycle-detail.component';
+import { GenreDetailComponent } from './genre-detail/genre-detail.component';
 
 
 @NgModule({
@@ -42,7 +45,9 @@ import { CycleFormComponent } from './cycle-form/cycle-form.component';
     GenreListComponent,
     GenreFormComponent,
     CycleListComponent,
-    CycleFormComponent
+    CycleFormComponent,
+    CycleDetailComponent,
+    GenreDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +62,8 @@ import { CycleFormComponent } from './cycle-form/cycle-form.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatMomentDateModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatExpansionModule
   ],
   providers: [
     AuthorService,

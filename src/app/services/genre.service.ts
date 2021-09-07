@@ -27,4 +27,8 @@ export class GenreService {
   public save(genre: Genre) {
     return this.http.post<Genre>(this.genresUrl, genre);
   }
+
+  public deleteAll(ids: number[]) {
+    return this.http.post<Genre[]>(`${this.genresUrl}/bulkDelete`, ids)
+  }
 }

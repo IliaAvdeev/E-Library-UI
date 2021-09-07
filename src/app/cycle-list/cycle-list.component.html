@@ -1,23 +1,28 @@
+<h2>Список циклов:</h2>
 <table>
-  <tr>
-    <th>Список циклов:</th>
-  </tr>
   <tbody>
-  <ul *ngFor="let cycle of pageOfCycles">
-    <details *ngIf="cycle.id!=1">
-      <summary>
-        {{ cycle.name }}
-      </summary>
-      <ul *ngFor="let book of getBooks(cycle.id)">
-        <li><a routerLink="/books/{{ book.id }}">{{ book.title }}</a></li>
-      </ul>
-    </details>
-  </ul>
+    <tr *ngFor="let cycle of pageOfCycles">
+      <div *ngIf="cycle.id != 1">
+        <td>
+          <mat-checkbox *ngIf="!checkboxesHidden"
+                      (change)="selectCycle(cycle.id)"></mat-checkbox>
+        </td>
+        <td>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              {{ cycle.name }}
+            </mat-expansion-panel-header>
+            <ng-template matExpansionPanelContent>
+              <app-cycle-detail [cycle]="cycle"></app-cycle-detail>
+            </ng-template>
+          </mat-expansion-panel>
+        </td>
+      </div>
+    </tr>
   </tbody>
 </table>
 <app-custom-paginator [length]=length
                       (pageEvent)="pageEvent = getServerData($event)"></app-custom-paginator>
-<p>
-  <button (click)="displayForm()" [hidden]="!formHidden">Добавить цикл</button>
-</p>
+<button (click)="formHidden = false" [hidden]="!formHidden">Добавить цикл</button>
 <app-cycle-form [hidden]="formHidden" (formSubmitted)="submitCycle($event)"></app-cycle-form>
+<button (click)="deleteCycles()">Удалить циклы</button>

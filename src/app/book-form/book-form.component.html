@@ -39,7 +39,7 @@
       <mat-label>Цикл</mat-label>
       <mat-select formControlName="cycle">
         <ng-container *ngFor="let cycle of cycles">
-          <mat-option *ngIf="cycle.id!=1"
+          <mat-option *ngIf="cycle.id != 1"
                     [value]="cycle.id">{{ cycle.name }}</mat-option>
         </ng-container>
       </mat-select>

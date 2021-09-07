@@ -1,9 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Genre } from '../model/genre';
-import { Book } from "../model/book";
 import { GenreService } from '../services/genre.service';
-import { BookService } from "../services/book.service";
 
 @Component({
   selector: 'app-genre-list',
@@ -14,24 +12,18 @@ export class GenreListComponent implements OnInit {
 
   length!: number;
   @Input() pageEvent?: PageEvent;
-  genres!: Genre[];
   pageOfGenres!: Genre[];
-  genresBooks = new Map<number, Book[]>();
+
   formHidden = true;
   @Input() formSubmission?: Genre;
 
-  constructor(private genreService: GenreService,
-              private bookService: BookService) { }
+  checkboxesHidden = true;
+  genresForDeletion: number[] = [];
+
+  constructor(private genreService: GenreService) { }
 
   ngOnInit(): void {
-    this.genreService.findAll().subscribe(data => {
-      this.length = data.length;
-      this.genres = data;
-      data.forEach((genre) => {
-        this.bookService.findByGenreId(genre.id)
-          .subscribe(data => this.genresBooks.set(genre.id, data));
-      })
-    });
+    this.genreService.findAll().subscribe(data => this.length = data.length);
     this.genreService.findPaginated(0, 20).subscribe(data => {
       this.pageOfGenres = data;
     });
@@ -43,22 +35,30 @@ export class GenreListComponent implements OnInit {
     return event;
   }
 
-  getBooks(id: number): Book[] {
-    let books = this.genresBooks.get(id);
-    if (books) {
-      return books;
-    }
-    return [];
-  }
-
-  displayForm() {
-    this.formHidden = false;
-  }
-
   submitGenre(formSubmission?: Genre) {
     if (formSubmission) {
       this.genreService.save(formSubmission)
         .subscribe(response => window.location.reload())
+    }
+  }
+
+  selectGenre(id: number) {
+    if (!this.genresForDeletion.includes(id)) {
+      this.genresForDeletion.push(id);
+    } else {
+      let index = this.genresForDeletion.indexOf(id);
+      this.genresForDeletion.splice(index, 1);
+    }
+  }
+
+  deleteGenres() {
+    if (this.checkboxesHidden) {
+      this.checkboxesHidden = false;
+    } else {
+      this.checkboxesHidden = true;
+      this.genreService.deleteAll(this.genresForDeletion).subscribe(
+        response => window.location.reload()
+      )
     }
   }
 }

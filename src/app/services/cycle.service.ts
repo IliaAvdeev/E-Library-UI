@@ -27,4 +27,8 @@ export class CycleService {
   public save(cycle: Cycle) {
     return this.http.post<Cycle>(this.cyclesUrl, cycle);
   }
+
+  public deleteAll(ids: number[]) {
+    return this.http.post<Cycle[]>(`${this.cyclesUrl}/bulkDelete`, ids);
+  }
 }

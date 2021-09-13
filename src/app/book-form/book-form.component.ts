@@ -22,7 +22,7 @@ export class BookFormComponent {
     author: [null, Validators.required],
     genre: [null, Validators.required],
     text: ['', Validators.required],
-    cycle: [null],
+    cycle: [1],
     description: ['']
   });
   errorMessage = 'Введите корректное значение';

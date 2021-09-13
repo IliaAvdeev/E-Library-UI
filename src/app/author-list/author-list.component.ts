@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Author } from '../model/author';
-import { AuthorService } from '../services/author.service';
-import { PageEvent } from '@angular/material/paginator';
+import {Component, OnInit, Input} from '@angular/core';
+import {Author} from '../model/author';
+import {AuthorService} from '../services/author.service';
+import {PageEvent} from '@angular/material/paginator';
+import {AuthService} from "../services/auth.service";
 
 @Component({
   selector: 'app-author-list',
@@ -10,19 +11,24 @@ import { PageEvent } from '@angular/material/paginator';
 })
 export class AuthorListComponent implements OnInit {
 
-  pageSize = 20;
-  pageIndex = 0;
-  pageSizeOptions = [5, 10, 20, 100];
   length!: number;
-  pageEvent?: PageEvent;
+  @Input() pageEvent?: PageEvent;
   pageOfAuthors!: Author[];
+  checkboxesHidden = true;
+  authorsForDeletion: number[] = [];
 
-  constructor(private authorService: AuthorService) {
+  admin: boolean;
+
+  constructor(
+    private authorService: AuthorService,
+    private authService: AuthService
+  ) {
+    this.admin = this.authService.isAdmin();
   }
 
   ngOnInit() {
     this.authorService.findAll().subscribe(data => this.length = data.length);
-    this.authorService.findPaginated(this.pageIndex, this.pageSize).subscribe(data => {
+    this.authorService.findPaginated(0, 20).subscribe(data => {
       this.pageOfAuthors = data;
     });
   }
@@ -31,5 +37,28 @@ export class AuthorListComponent implements OnInit {
     this.authorService.findPaginated(event?.pageIndex, event?.pageSize).subscribe(
       response => this.pageOfAuthors = response);
     return event;
+  }
+
+  deleteAuthors() {
+    if (this.checkboxesHidden) {
+      this.checkboxesHidden = false;
+    } else {
+      this.checkboxesHidden = true;
+      this.authorService.deleteAll(this.authorsForDeletion).subscribe(
+        response => {
+          this.authorsForDeletion = [];
+          window.location.reload()
+        }
+      )
+    }
+  }
+
+  selectAuthor(id: number) {
+    if (!this.authorsForDeletion.includes(id)) {
+      this.authorsForDeletion.push(id);
+    } else {
+      let index = this.authorsForDeletion.indexOf(id);
+      this.authorsForDeletion.splice(index, 1);
+    }
   }
 }

@@ -1,0 +1,28 @@
+<div class="container">
+  <h3>Список циклов:</h3>
+  <table>
+    <tbody>
+      <tr *ngFor="let cycle of pageOfCycles" [hidden]="cycle.id==1">
+          <td>
+            <mat-checkbox *ngIf="!checkboxesHidden"
+                        (change)="selectCycle(cycle.id)"></mat-checkbox>
+          </td>
+          <td>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                {{ cycle.name }}
+              </mat-expansion-panel-header>
+              <ng-template matExpansionPanelContent>
+                <app-cycle-detail [cycle]="cycle"></app-cycle-detail>
+              </ng-template>
+            </mat-expansion-panel>
+          </td>
+      </tr>
+    </tbody>
+  </table>
+  <button (click)="formHidden = false" [hidden]="!admin || !formHidden">Добавить</button>
+  <app-cycle-form [hidden]="formHidden" (formSubmitted)="submitCycle($event)"></app-cycle-form>
+  <button (click)="deleteCycles()" [hidden]="!admin">Удалить</button>
+  <app-custom-paginator [length]=length
+                        (pageEvent)="pageEvent = getServerData($event)"></app-custom-paginator>
+</div>

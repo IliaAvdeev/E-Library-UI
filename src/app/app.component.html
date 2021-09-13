@@ -1,15 +1,21 @@
-<div class="container">
-  <div style="text-align: center;">
-    <h1>{{ title }}</h1>
-    <div>
-      <a routerLink="">Главная</a>
-    </div>
-    <div>
-      <a routerLink="/authors">Авторы</a>
-    </div>
-    <div>
-      <a routerLink="/books">Книги</a>
+<div class="top-navigation">
+  <button class="hello">
+    Привет,<br><br>{{ username }}!
+  </button>
+  <button routerLink="/authors">Авторы</button>
+  <button routerLink="/books">Книги</button>
+  <button routerLink="" id="bookwarm-header">{{ title }}</button>
+  <button routerLink="/genres">Жанры</button>
+  <button routerLink="/cycles">Циклы</button>
+  <div class="dropdown">
+    <button routerLink="/profile">Профиль</button>
+    <div class="dropdown-content">
+      <button [hidden]="isLoggedIn()" routerLink="/users/login">Войти</button>
+      <button [hidden]="isLoggedIn()" routerLink="/users/register">Зарегистрироваться</button>
+      <button [hidden]="!isLoggedIn()" (click)="logout()">Выйти</button>
     </div>
   </div>
+</div>
+<div>
   <router-outlet></router-outlet>
 </div>

@@ -1,1 +1,74 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+}
+
+h3 {
+  font-size: 24px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+h4 {
+  font-size: 18px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+button {
+  font-family: 'Press Start 2P', cursive;
+  background: none;
+  border: none;
+  padding: 7px;
+  margin: 5px;
+  color: #764125;
+}
+
+button:hover {
+  background: rgba(234, 119, 015, .5);
+}
+
+button:disabled {
+  color: #d2c09c;
+}
+
+button:disabled:hover {
+  background: rgba(210, 192, 156, .5);
+}
+
+.container {
+  background: rgba(255, 240, 210, .2);
+  margin-top: 1%;
+  margin-left: 24%;
+  margin-right: 24%;
+}
+
+.info {
+  margin-left: 10px;
+}
+
+pre {
+  white-space: pre-line;
+  margin: 20px;
+  text-align: justify;
+  font-size: 14px;
+}
+
+mat-form-field {
+  width: 50%;
+  margin-left: 10px;
+}
+
+table {
+  margin-left: 10px;
+  width: 90%;
+}
+
+td {
+  padding: 5px;
+}
+
+a {
+  text-decoration: none;
+}
+

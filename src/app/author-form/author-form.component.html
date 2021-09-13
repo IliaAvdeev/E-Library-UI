@@ -1,4 +1,4 @@
-<form [formGroup]="authorForm" (ngSubmit)="onSubmit()">
+<form class="container" [formGroup]="authorForm" (ngSubmit)="onSubmit()">
   <p>
     <mat-form-field appearance="legacy">
       <mat-label>Имя автора</mat-label>
@@ -67,8 +67,3 @@
 
   <button type="submit" [disabled]="!authorForm.valid">Отправить</button>
 </form>
-
-<!--p>Form Value: {{ authorForm.value | json }}</p>
-
-<p>Form Status: {{ authorForm.status }}</p-->
-

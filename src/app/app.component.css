@@ -1,0 +1,38 @@
+.top-navigation {
+  text-align: center;
+  background: rgba(255, 240, 210, .6);
+  padding-bottom: 16px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  text-align: left;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+  position: absolute;
+}
+
+#bookwarm-header {
+  font-size: 48px;
+  border: none;
+  position: relative;
+  top: 18px;
+  color: #432313;
+}
+
+.hello {
+  font-size: 12px;
+  position: relative;
+  bottom: 10px;
+}
+
+.hello:hover {
+  background: none;
+}

@@ -1,0 +1,37 @@
+@use '~@angular/material' as mat;
+@include mat.core();
+
+$bw-dark-brown: (
+  500: #854E31,
+  contrast: (
+        500: white
+    )
+);
+
+$bw-light-brown: (
+  500: #3d2112,
+  contrast: (
+        500: white
+    )
+);
+
+$bw-orange: (
+    500: #ea770f,
+  contrast: (
+        500: white
+    )
+);
+
+$bookwarm-primary: mat.define-palette($bw-dark-brown, 500);
+$bookwarm-accent: mat.define-palette($bw-light-brown, 500);
+$bookwarm-warn: mat.define-palette($bw-orange, 500);
+
+$bookwarm-theme: mat.define-light-theme((
+ color: (
+   primary: $bookwarm-primary,
+   accent: $bookwarm-accent,
+   warn: $bookwarm-warn
+ )
+));
+
+@include mat.all-component-themes($bookwarm-theme);

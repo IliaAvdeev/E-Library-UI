@@ -1,0 +1,28 @@
+<div class="container">
+  <h3>Список жанров:</h3>
+  <table>
+    <tbody>
+      <tr *ngFor="let genre of pageOfGenres">
+        <td>
+          <mat-checkbox *ngIf="!checkboxesHidden"
+                      (change)="selectGenre(genre.id)"></mat-checkbox>
+        </td>
+        <td class="expansion">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              {{ genre.name }}
+            </mat-expansion-panel-header>
+            <ng-template matExpansionPanelContent>
+              <app-genre-detail [genre]="genre"></app-genre-detail>
+            </ng-template>
+          </mat-expansion-panel>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button (click)="formHidden = false" [hidden]="!admin || !formHidden">Добавить</button>
+  <app-genre-form [hidden]="formHidden" (formSubmitted)="submitGenre($event)"></app-genre-form>
+  <button (click)="deleteGenres()" [hidden]="!admin">Удалить</button>
+  <app-custom-paginator [length]=length
+                        (pageEvent)="pageEvent = getServerData($event)"></app-custom-paginator>
+</div>

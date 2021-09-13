@@ -1,29 +1,33 @@
-<div>
+<div class="container">
   <div *ngIf="book">
-    <div>
-      <button (click)="delete()">Удалить</button>
-    </div>
+    <button (click)="delete()" [hidden]="!admin">Удалить</button>
+    <button (click)="edit()" [hidden]="!admin" *ngIf="book!==editBook">Изменить</button>
 
     <div *ngIf="book!==editBook">
-      <div>
-        <button (click)="edit()">Изменить</button>
+      <h3>{{ book.title }}</h3>
+      <div class="info">
+        <div>
+          Автор: <a href="/authors/{{ author.id }}">{{ author.name }}</a>
+        </div>
+        <div>
+          Жанр: {{ genre.name }}
+        </div>
+        <div *ngIf="cycle.id != 1">
+          Цикл: {{ cycle.name }}
+        </div>
+        <div *ngIf="book.description">
+          Описание: {{ book.description }}
+        </div>
       </div>
-      <h2>{{ book.title }}</h2>
-      <div *ngIf="author">
-        Автор: <a href="/authors/{{ author.id }}">{{ author.name }}</a>
+      <div *ngIf="textHidden">
+        <button (click)="expandText()" [disabled]="!loggedIn">Развернуть текст</button>
       </div>
-      <div *ngIf="genre">
-        Жанр: {{ genre.name }}
+      <div *ngIf="!textHidden">
+        <button (click)="collapseText()">Свернуть текст</button>
+        <pre>
+          {{ book.text }}
+        </pre>
       </div>
-      <div *ngIf="cycle">
-        Цикл: {{ cycle.name }}
-      </div>
-      <div *ngIf="book.description">
-        Описание: {{ book.description }}
-      </div>
-      <pre>
-        {{ book.text }}
-      </pre>
     </div>
 
     <div *ngIf="book===editBook">

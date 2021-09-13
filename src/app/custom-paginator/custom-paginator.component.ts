@@ -1,7 +1,7 @@
 import '@angular/localize';
-import { Component, Injectable, Output, Input, EventEmitter } from '@angular/core';
-import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
-import { Subject } from 'rxjs';
+import {Component, Injectable, Output, Input, EventEmitter} from '@angular/core';
+import {MatPaginatorIntl, PageEvent} from '@angular/material/paginator';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-custom-paginator',

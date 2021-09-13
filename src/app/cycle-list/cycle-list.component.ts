@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
-import { Cycle } from "../model/cycle";
-import { CycleService } from "../services/cycle.service";
+import {Component, OnInit, Input} from '@angular/core';
+import {PageEvent} from '@angular/material/paginator';
+import {Cycle} from "../model/cycle";
+import {CycleService} from "../services/cycle.service";
+import {AuthService} from "../services/auth.service";
 
 @Component({
   selector: 'app-cycle-list',
@@ -20,7 +21,14 @@ export class CycleListComponent implements OnInit {
   checkboxesHidden = true;
   cyclesForDeletion: number[] = [];
 
-  constructor(private cycleService: CycleService) { }
+  admin: boolean;
+
+  constructor(
+    private cycleService: CycleService,
+    private authService: AuthService
+  ) {
+    this.admin = this.authService.isAdmin();
+  }
 
   ngOnInit(): void {
     this.cycleService.findAll().subscribe(data => this.length = data.length);

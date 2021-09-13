@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Genre } from "../model/genre";
-import { Book } from "../model/book";
-import { BookService } from "../services/book.service";
+import {Component, OnInit, Input} from '@angular/core';
+import {Genre} from "../model/genre";
+import {Book} from "../model/book";
+import {BookService} from "../services/book.service";
 
 
 @Component({
@@ -13,7 +13,8 @@ export class GenreDetailComponent implements OnInit {
   @Input() genre?: Genre;
   books?: Book[];
 
-  constructor(private bookService: BookService) { }
+  constructor(private bookService: BookService) {
+  }
 
   ngOnInit(): void {
     if (this.genre) {

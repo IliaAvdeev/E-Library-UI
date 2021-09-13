@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder } from '@angular/forms';
-import { Validators } from '@angular/forms';
-import { UserService } from "../services/user.service";
+import {Component} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {FormBuilder} from '@angular/forms';
+import {Validators} from '@angular/forms';
+import {UserService} from "../services/user.service";
 
 @Component({
   selector: 'app-user-registration-form',
@@ -11,23 +11,30 @@ import { UserService } from "../services/user.service";
 })
 export class UserRegistrationFormComponent {
   userForm = this.fb.group({
-    email: ['', Validators.required],
+    email: ['', Validators.required, Validators.email],
     username: ['', Validators.required],
-    password: ['', Validators.required]
+    password: ['', Validators.required],
+    role: [2]
   });
   hidePassword = true;
-  errorMessage = 'Введите корректное значение';
+  errorMessage = "Введите корректное значение";
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder,
     private userService: UserService
-  ) { }
-
-  onSubmit() {
-    this.userService.save({...this.userForm.value})
-      .subscribe(response => this.router.navigate(['']))
+  ) {
   }
 
+  onSubmit() {
+    this.userService.register({...this.userForm.value})
+      .subscribe(
+        response => {
+          this.router.navigateByUrl('');
+        }, error => {
+          window.alert(error.error.message);
+        }
+      )
+  }
 }

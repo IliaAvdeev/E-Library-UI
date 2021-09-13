@@ -22,7 +22,7 @@ export class BookFormComponent {
     author: [null, Validators.required],
     genre: [null, Validators.required],
     text: ['', Validators.required],
-    cycle: [null],
+    cycle: [1],
     description: ['']
   });
   errorMessage = 'Введите корректное значение';
@@ -53,9 +53,6 @@ export class BookFormComponent {
   }
 
   onSubmit() {
-    if (this.bookForm.controls['cycle'].value == null) {
-      this.bookForm.controls['cycle'].setValue(1);
-    }
     this.bookService.save({...this.bookForm.value}).subscribe(result => this.gotoBookList());
   }
 

@@ -1,7 +1,7 @@
-import { Component, Output, EventEmitter } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { Validators } from '@angular/forms';
-import { Cycle } from "../model/cycle";
+import {Component, Output, EventEmitter} from '@angular/core';
+import {FormBuilder} from '@angular/forms';
+import {Validators} from '@angular/forms';
+import {Cycle} from "../model/cycle";
 
 @Component({
   selector: 'app-cycle-form',
@@ -17,11 +17,11 @@ export class CycleFormComponent {
 
   constructor(
     private fb: FormBuilder
-  ) { }
+  ) {
+  }
 
   onSubmit() {
     this.formSubmitted.emit({...this.cycleForm.value});
   }
 
 }
-

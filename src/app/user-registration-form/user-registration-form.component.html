@@ -1,4 +1,4 @@
-<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+<form class="container" [formGroup]="userForm" (ngSubmit)="onSubmit()">
   <p>
     <mat-form-field appearance="legacy">
       <mat-label>Адрес электронной почты</mat-label>
@@ -40,6 +40,5 @@
       </button>
     </mat-form-field>
   </p>
-
   <button type="submit" [disabled]="!userForm.valid">Зарегистрироваться</button>
 </form>

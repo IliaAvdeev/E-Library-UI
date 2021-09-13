@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
-import { Genre } from '../model/genre';
-import { GenreService } from '../services/genre.service';
+import {Component, OnInit, Input} from '@angular/core';
+import {PageEvent} from '@angular/material/paginator';
+import {Genre} from '../model/genre';
+import {GenreService} from '../services/genre.service';
+import {AuthService} from "../services/auth.service";
 
 @Component({
   selector: 'app-genre-list',
@@ -20,7 +21,14 @@ export class GenreListComponent implements OnInit {
   checkboxesHidden = true;
   genresForDeletion: number[] = [];
 
-  constructor(private genreService: GenreService) { }
+  admin: boolean;
+
+  constructor(
+    private genreService: GenreService,
+    private authService: AuthService
+  ) {
+    this.admin = this.authService.isAdmin();
+  }
 
   ngOnInit(): void {
     this.genreService.findAll().subscribe(data => this.length = data.length);

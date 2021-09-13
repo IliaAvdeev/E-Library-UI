@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Author } from '../model/author';
-import { AuthorService } from '../services/author.service';
-import { PageEvent } from '@angular/material/paginator';
+import {Component, OnInit, Input} from '@angular/core';
+import {Author} from '../model/author';
+import {AuthorService} from '../services/author.service';
+import {PageEvent} from '@angular/material/paginator';
+import {AuthService} from "../services/auth.service";
 
 @Component({
   selector: 'app-author-list',
@@ -16,7 +17,13 @@ export class AuthorListComponent implements OnInit {
   checkboxesHidden = true;
   authorsForDeletion: number[] = [];
 
-  constructor(private authorService: AuthorService) {
+  admin: boolean;
+
+  constructor(
+    private authorService: AuthorService,
+    private authService: AuthService
+  ) {
+    this.admin = this.authService.isAdmin();
   }
 
   ngOnInit() {

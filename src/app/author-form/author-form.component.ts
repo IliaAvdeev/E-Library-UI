@@ -1,12 +1,9 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder } from '@angular/forms';
-import { Validators } from '@angular/forms';
-import { AuthorService } from "../services/author.service";
-
-import * as _moment from 'moment';
-
-const moment = _moment;
+import {Component} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {FormBuilder} from '@angular/forms';
+import {Validators} from '@angular/forms';
+import {AuthorService} from "../services/author.service";
+import * as moment from 'moment';
 
 
 @Component({
@@ -30,7 +27,8 @@ export class AuthorFormComponent {
     private router: Router,
     private fb: FormBuilder,
     private authorService: AuthorService
-  ) { }
+  ) {
+  }
 
   onSubmit() {
     this.authorForm.controls['dateOfBirth']

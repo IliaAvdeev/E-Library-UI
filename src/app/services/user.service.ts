@@ -1,7 +1,6 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { User } from '../model/user';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {User} from '../model/user';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +13,11 @@ export class UserService {
     this.usersUrl = 'http://localhost:5200/users';
   }
 
-  public findByEmail(email: string, password: string): Observable<User> {
-    return this.http.get<User>(`${this.usersUrl}?email=${email}&password=${password}`);
+  public register(user: User) {
+    return this.http.post<any>(`${this.usersUrl}/register`, user, {observe: 'response'});
   }
 
-  public save(user: User) {
-    return this.http.post<User>(this.usersUrl, user);
+  public authenticate(email: string, password: string) {
+    return this.http.post<any>(`${this.usersUrl}/login`, {email, password});
   }
 }

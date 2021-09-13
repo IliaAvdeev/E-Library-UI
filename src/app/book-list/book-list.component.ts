@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Book } from '../model/book';
-import { Author } from '../model/author'
-import { BookService } from '../services/book.service';
-import { AuthorService } from '../services/author.service';
+import {Component, OnInit} from '@angular/core';
+import {Book} from '../model/book';
+import {Author} from '../model/author'
+import {BookService} from '../services/book.service';
+import {AuthorService} from '../services/author.service';
 import {PageEvent} from "@angular/material/paginator";
+import {AuthService} from "../services/auth.service";
 
 @Component({
   selector: 'app-book-list',
@@ -23,9 +24,14 @@ export class BookListComponent implements OnInit {
   checkboxesHidden = true;
   booksForDeletion: number[] = [];
 
+  admin: boolean;
+
   constructor(
     private bookService: BookService,
-    private authorService: AuthorService) {
+    private authorService: AuthorService,
+    private authService: AuthService
+  ) {
+    this.admin = this.authService.isAdmin();
   }
 
   ngOnInit() {

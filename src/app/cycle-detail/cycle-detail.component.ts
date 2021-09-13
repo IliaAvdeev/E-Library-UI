@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Cycle } from "../model/cycle";
-import { Book } from "../model/book";
-import { BookService } from "../services/book.service";
+import {Component, Input, OnInit} from '@angular/core';
+import {Cycle} from "../model/cycle";
+import {Book} from "../model/book";
+import {BookService} from "../services/book.service";
 
 @Component({
   selector: 'app-cycle-detail',
@@ -12,7 +12,8 @@ export class CycleDetailComponent implements OnInit {
   @Input() cycle?: Cycle;
   books?: Book[];
 
-  constructor(private bookService: BookService) { }
+  constructor(private bookService: BookService) {
+  }
 
   ngOnInit(): void {
     if (this.cycle) {
@@ -20,5 +21,4 @@ export class CycleDetailComponent implements OnInit {
         .subscribe(data => this.books = data);
     }
   }
-
 }

@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder } from '@angular/forms';
-import { Validators } from '@angular/forms';
-import { UserService } from "../services/user.service";
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
+import {FormBuilder} from '@angular/forms';
+import {Validators} from '@angular/forms';
+import {AuthService} from "../services/auth.service";
 
 @Component({
   selector: 'app-user-login-form',
@@ -11,28 +11,32 @@ import { UserService } from "../services/user.service";
 })
 export class UserLoginFormComponent {
   userForm = this.fb.group({
-    email: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required]
   });
   hidePassword = true;
   errorMessage = 'Введите корректное значение';
 
   constructor(
-    private route: ActivatedRoute,
+    private authService: AuthService,
     private router: Router,
-    private fb: FormBuilder,
-    private userService: UserService
-  ) { }
+    private fb: FormBuilder
+  ) {
+  }
 
-  onSubmit() {
-    this.userService.findByEmail(this.userForm.controls['email'].value,
-      this.userForm.controls['password'].value)
-      .subscribe(response => {
-        if (response) {
-          this.router.navigate([''])
-        } else {
-          this.router.navigate(['/users/sign-up'])
-        }
-      });
+  login() {
+    const form = this.userForm.value;
+
+    if (form.email && form.password) {
+      this.authService.login(form.email, form.password)
+        .subscribe(
+          () => {
+            this.router.navigateByUrl("/")
+              .then(() =>
+                window.location.reload()
+              );
+          }
+        );
+    }
   }
 }

@@ -1,15 +1,14 @@
 <div class="container">
   <div *ngIf="author">
-    <div>
+    <div [hidden]="!admin">
       <button (click)="delete()">Удалить</button>
+      <button (click)="edit()" *ngIf="author!==editAuthor">Изменить</button>
+      <button (click)="update()" *ngIf="author===editAuthor">Сохранить</button>
     </div>
 
     <div *ngIf="author!==editAuthor">
-      <div>
-        <button (click)="edit()">Изменить</button>
-      </div>
-      <h2>{{ author.name }}</h2>
-      <div *ngIf="author.dateOfDeath != undefined">
+      <h3>{{ author.name }}</h3>
+      <div class="info" *ngIf="author.dateOfDeath != undefined">
         {{ formatDate(author.dateOfBirth) }}, {{ author.countryOfBirth }}
         — {{ formatDate(author.dateOfDeath) }}, {{ author.countryOfDeath }}
       </div>
@@ -17,13 +16,13 @@
         {{ formatDate(author.dateOfBirth) }}, {{ author.countryOfBirth }}
       </div>
       <div *ngIf="books.length > 0">
-        <h3>Библиография: </h3>
+        <h4>Библиография</h4>
         <ul *ngFor="let book of books">
           <li><a routerLink="/books/{{ book.id }}">{{ book.title }}</a></li>
         </ul>
       </div>
       <div *ngIf="author.biography">
-        <h3>Биография:</h3>
+        <h4>Биография</h4>
         <div *ngIf="fullBioHidden">
           <pre>{{ briefBio }}</pre>
           <button (click)="expandBio()">Развернуть</button>
@@ -36,9 +35,6 @@
     </div>
 
     <div *ngIf="author===editAuthor">
-      <div>
-        <button (click)="update()">Сохранить</button>
-      </div>
       <p>
         <mat-form-field appearance="legacy">
           <mat-label>Имя автора</mat-label>
@@ -102,8 +98,8 @@
         <mat-form-field appearance="legacy">
           <mat-label>Биография</mat-label>
           <textarea matInput
-                 [(ngModel)]="author.biography"
-                 (keyup.enter)="update()"></textarea>
+                    [(ngModel)]="author.biography"
+                    (keyup.enter)="update()"></textarea>
           <mat-error>{{ errorMessage }}</mat-error>
         </mat-form-field>
       </p>

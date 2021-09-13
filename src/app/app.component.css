@@ -1,18 +1,7 @@
 .top-navigation {
   text-align: center;
-  position: sticky;
-  top: 0;
-}
-
-.top-navigation button {
-  font-family: 'Press Start 2P', cursive;
-  background: none;
-  border: none;
-  padding: 7px;
-}
-
-.top-navigation button:hover {
-  background: rgba(255, 240, 210, .5);
+  background: rgba(255, 240, 210, .6);
+  padding-bottom: 16px;
 }
 
 .dropdown {
@@ -35,4 +24,15 @@
   border: none;
   position: relative;
   top: 18px;
+  color: #432313;
+}
+
+.hello {
+  font-size: 12px;
+  position: relative;
+  bottom: 10px;
+}
+
+.hello:hover {
+  background: none;
 }

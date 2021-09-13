@@ -1,7 +1,7 @@
-import { Component, Output, EventEmitter } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { Validators } from '@angular/forms';
-import { Genre } from "../model/genre";
+import {Component, Output, EventEmitter} from '@angular/core';
+import {FormBuilder} from '@angular/forms';
+import {Validators} from '@angular/forms';
+import {Genre} from "../model/genre";
 
 @Component({
   selector: 'app-genre-form',
@@ -10,7 +10,7 @@ import { Genre } from "../model/genre";
 })
 export class GenreFormComponent {
   genreForm = this.fb.group({
-    name: ['', Validators.required]
+      name: ['', Validators.required]
     }
   );
   errorMessage = 'Введите значение';
@@ -18,7 +18,8 @@ export class GenreFormComponent {
 
   constructor(
     private fb: FormBuilder
-  ) { }
+  ) {
+  }
 
   onSubmit() {
     this.formSubmitted.emit({...this.genreForm.value});

@@ -19,9 +19,12 @@
           Описание: {{ book.description }}
         </div>
       </div>
-      <div *ngIf="textHidden">
-        <button (click)="expandText()" [disabled]="!loggedIn">Развернуть текст</button>
-      </div>
+      <span *ngIf="textHidden"
+           matTooltip="Войдите или зарегистрируйтесь"
+           [matTooltipDisabled]="loggedIn">
+        <button (click)="expandText()"
+                [disabled]="!loggedIn">Развернуть текст</button>
+      </span>
       <div *ngIf="!textHidden">
         <button (click)="collapseText()">Свернуть текст</button>
         <pre>
